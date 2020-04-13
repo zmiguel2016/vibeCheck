@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase:{
+    apiKey: "AIzaSyAUCAhQ492HxaUSoetMo17af5copXvzW-w",
+    authDomain: "vibecheck-83aa3.firebaseapp.com",
+    databaseURL: "https://vibecheck-83aa3.firebaseio.com",
+    projectId: "vibecheck-83aa3",
+    storageBucket: "vibecheck-83aa3.appspot.com",
+    messagingSenderId: "331853015181",
+    appId: "1:331853015181:web:039ccefd6876729ec09ac4",
+    measurementId: "G-5E57CEE7H3"
+  }
 };
 
 /*
