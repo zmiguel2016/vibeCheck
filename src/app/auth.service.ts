@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { Router } from '@angular/router';
+import { Router, CanActivate } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore'
 
 //import { Observable } from 'rxjs/Observable';
@@ -59,6 +59,15 @@ login(email: string, password: string) {
   getUID(){
     return this.firebaseAuth.auth.currentUser.uid
     
+  }
+
+  async canActivate(route){
+    var loguser = this.firebaseAuth.auth.currentUser
+    if(loguser){
+      return true
+    }
+    this.router.navigate(['/login'])
+    return false
   }
 
 }

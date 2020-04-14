@@ -15,18 +15,22 @@ import { AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore
 
 import { AuthService } from './auth.service';
 
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule],
+    AngularFirestoreModule
+  ],
   providers: [AuthService,
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AngularFirestore
+    
   ],
   bootstrap: [AppComponent]
 })

@@ -1,12 +1,35 @@
 import { Component } from '@angular/core';
+import {Router } from '@angular/router'
 
+import { ItemService } from '../item.service';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+posts=[]
+  constructor(private router: Router,
+    public itemService: ItemService) {}
 
-  constructor() {}
+
+    ngOnInit(){
+  
+    }
+    ionViewDidEnter(){
+      this.loadItems();
+    }
+    loadItems(){
+      //this.itemService.postRefresh();
+      this.posts=[];
+      this.posts = this.itemService.getFeed();
+      console.log(this.posts)
+    }
+    openNewPostPage(){
+      this.router.navigate(["/new-post"]);
+  
+    }
+
+
 
 }
