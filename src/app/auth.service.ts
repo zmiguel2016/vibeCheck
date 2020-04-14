@@ -13,6 +13,8 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   user: Observable<firebase.User>;
+  uid:string
+ 
 
   constructor(private router: Router,private firebaseAuth: AngularFireAuth,public afStore: AngularFirestore) { 
     this.user = firebaseAuth.authState;
@@ -25,7 +27,8 @@ export class AuthService {
         email
       })
       .then(value => {
-        console.log('Success!', value);
+        //this.uid=res.user.uid
+        console.log('Success!', this.getUID()); 
         this.router.navigate(['/tabs/tab1']);
       })
       .catch(err => {
@@ -33,12 +36,13 @@ export class AuthService {
       });    
   }
 
-  login(email: string, password: string) {
+login(email: string, password: string) {
     this.firebaseAuth
       .auth
       .signInWithEmailAndPassword(email, password)
       .then(value => {
-        console.log('Nice, it worked!');
+       //this.uid=res.user.uid
+        console.log('Nice, it worked!', this.getUID());
         this.router.navigate(['/tabs/tab1']);
       })
       .catch(err => {
@@ -50,6 +54,11 @@ export class AuthService {
     this.firebaseAuth
       .auth
       .signOut();
+  }
+
+  getUID(){
+    return this.firebaseAuth.auth.currentUser.uid
+    
   }
 
 }
