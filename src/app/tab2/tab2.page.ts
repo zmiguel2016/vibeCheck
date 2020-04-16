@@ -25,6 +25,9 @@ posts=[]
       this.posts = this.itemService.getFeed();
       console.log(this.posts)
     }
+    goToPost(post){
+      this.router.navigate(['/post-detail', post])
+    }
     openNewPostPage(){
       this.router.navigate(["/new-post"]);
   

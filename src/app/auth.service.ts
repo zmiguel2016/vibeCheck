@@ -24,12 +24,13 @@ export class AuthService {
       .auth
       .createUserWithEmailAndPassword(email, password)
       this.afStore.doc(`users/${res.user.uid}`).set({
-        email
+        email,
+        uid: res.user.uid
       })
       .then(value => {
         //this.uid=res.user.uid
         console.log('Success!', this.getUID()); 
-        this.router.navigate(['/tabs/tab1']);
+        this.router.navigate(['/tabs/tab2']);
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
@@ -43,7 +44,7 @@ login(email: string, password: string) {
       .then(value => {
        //this.uid=res.user.uid
         console.log('Nice, it worked!', this.getUID());
-        this.router.navigate(['/tabs/tab1']);
+        this.router.navigate(['/tabs/tab2']);
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
@@ -59,6 +60,9 @@ login(email: string, password: string) {
   getUID(){
     return this.firebaseAuth.auth.currentUser.uid
     
+  }
+  getUser(){
+    return this.firebaseAuth.auth.currentUser.email
   }
 
   async canActivate(route){

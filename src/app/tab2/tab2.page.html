@@ -15,7 +15,7 @@
   <ion-content>
   
     <ion-list>
-      <ion-item *ngFor="let post of posts" (click)="goToPost(item)">
+      <ion-item *ngFor="let post of posts" (click)="goToPost(post)">
               <ion-thumbnail slot="end"> 
                 <ion-img [src]="post.img"></ion-img>
     

@@ -6,7 +6,7 @@ import { ItemService } from '../item.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { firestore } from 'firebase/app';
 import * as firebase from "firebase";
-
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -19,7 +19,7 @@ export class NewPostPage implements OnInit {
   constructor(private router: Router,
  	 public formBuilder: FormBuilder,
         public itemService: ItemService,
-        public afstore: AngularFirestore) { }
+        public afstore: AngularFirestore,public authService: AuthService) { }
 
   ngOnInit() {
     this.new_item_form = this.formBuilder.group({
@@ -34,6 +34,7 @@ export class NewPostPage implements OnInit {
     let data = {
     id: randomId,
     title: value.title,
+    username: this.authService.getUser()
     }
     
     
@@ -41,8 +42,9 @@ export class NewPostPage implements OnInit {
   
   	this.goBack();
   }
+
   goBack(){
-    this.router.navigate(['/tabs/tab1']);
+    this.router.navigate(['/tabs/tab2']);
 }
 
 }

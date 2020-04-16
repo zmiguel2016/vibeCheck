@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ export class RegisterPage implements OnInit {
   email:string;
   password: string;
   cpassword:string;
-  constructor(public authService: AuthService,public alert: AlertController,) { }
+  constructor(public authService: AuthService,public alert: AlertController,private router: Router) { }
 
   ngOnInit() {
   }
@@ -32,5 +33,7 @@ export class RegisterPage implements OnInit {
     })
     await alert.present()
   }
+
+  
 
 }

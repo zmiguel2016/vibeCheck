@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{currentpost.title}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card>
+    <img [src]="currentpost.img">
+    <ion-item>
+      <h2>{{currentpost.title}}</h2>
+
+    </ion-item>
+</ion-card>
+</ion-content>
