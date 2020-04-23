@@ -8,6 +8,7 @@ import { ItemService } from '../item.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+showProgress : any;
 posts=[]
   constructor(private router: Router,
     public itemService: ItemService) {}
@@ -19,11 +20,23 @@ posts=[]
     ionViewDidEnter(){
       this.loadItems();
     }
+    async doRefresh(event) {
+      this.showProgress = 1;
+      this.reset();
+      await this.loadItems();
+      setTimeout(() => {
+        event.target.complete();
+      }, 10);
+      this.showProgress = 0;
+    }
     loadItems(){
       //this.itemService.postRefresh();
       this.posts=[];
       this.posts = this.itemService.getFeed();
       console.log(this.posts)
+    }
+    reset(){
+      this.posts=[];
     }
     goToPost(post){
       this.router.navigate(['/post-detail', post])
