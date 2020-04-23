@@ -17,9 +17,10 @@ import { AuthService } from '../auth.service';
 export class NewPostPage implements OnInit {
   new_item_form: FormGroup;
   constructor(private router: Router,
- 	 public formBuilder: FormBuilder,
-        public itemService: ItemService,
-        public afstore: AngularFirestore,public authService: AuthService) { }
+ 	    public formBuilder: FormBuilder,
+      public itemService: ItemService,
+      public afstore: AngularFirestore,
+      public authService: AuthService) { }
 
   ngOnInit() {
     this.new_item_form = this.formBuilder.group({
