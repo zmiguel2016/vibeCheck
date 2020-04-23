@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'post-detail',
     loadChildren: () => import('./post-detail/post-detail.module').then( m => m.PostDetailPageModule)
+  },
+  {
+    path: 'add-friends',
+    loadChildren: () => import('./add-friends/add-friends.module').then( m => m.AddFriendsPageModule)
   }
 ];
 @NgModule({

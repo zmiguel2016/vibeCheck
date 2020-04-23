@@ -5,14 +5,16 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+//mport { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestore, AngularFirestoreModule} from '@angular/fire/firestore'
-
+import { FormsModule } from '@angular/forms'  
+import { ReactiveFormsModule} from '@angular/forms' 
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './auth.service';
 
 
@@ -22,6 +24,9 @@ import { AuthService } from './auth.service';
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    ReactiveFormsModule,
+    HttpClientModule,
+    FormsModule,
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
@@ -34,4 +39,5 @@ import { AuthService } from './auth.service';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {}

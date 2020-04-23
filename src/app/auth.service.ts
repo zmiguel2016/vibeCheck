@@ -12,6 +12,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  // addFriend(email: string) {
+  //   throw new Error("Method not implemented.");
+  // }
   user: Observable<firebase.User>;
   uid:string
  
@@ -50,7 +53,22 @@ login(email: string, password: string) {
         console.log('Something went wrong:',err.message);
       });
   }
-
+  // async addFriend(email: string) {
+  //   const res =await this.firebaseAuth
+  //     .auth
+  //     .createUserWithEmail(email)
+  //     this.afStore.doc(`users/${res.user.uid}`).set({
+  //       email
+  //     })
+  //     .then(value => {
+  //       //this.uid=res.user.uid
+  //       console.log('Success!', this.getUID()); 
+  //       this.router.navigate(['/tabs/tab1']);
+  //     })
+  //     .catch(err => {
+  //       console.log('Something went wrong:',err.message);
+  //     });    
+  // }
   logout() {
     this.firebaseAuth
       .auth
