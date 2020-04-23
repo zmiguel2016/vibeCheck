@@ -23,7 +23,9 @@ export class Tab1Page {
   //   this.friends = this.friendsService.getFriends();
   // }
 
-
+  addFriend(){
+    this.router.navigate(["/add-friends"])
+  }
   // go(){
   //   console.log("add friends button is clicked")
   //   //this.router.navigate(['add-friends']);

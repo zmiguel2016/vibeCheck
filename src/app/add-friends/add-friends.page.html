@@ -1,8 +1,11 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
       <ion-title>
-        Add A Friend Here
+        Friend Search
       </ion-title>
+      <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     </ion-toolbar>
   </ion-header>
   <ion-content padding>
@@ -17,5 +20,4 @@
       </ion-list>
       <ion-button fill="solid" expand="block" color="dark" (click)="addFriend()">Add Friends</ion-button>
       <ion-button fill="solid" expand="block" color="dark" (click)="removeFriend()">Delete Friend</ion-button>
-      <ion-button href="tabs/tab1"> Go Back</ion-button>
     </ion-content>
