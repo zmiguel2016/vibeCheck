@@ -1,8 +1,13 @@
-ion-content ion-toolbar {
+/*ion-content ion-toolbar {
   --background: translucent;
-}
+}*/
 
 .avatars{
   margin: auto;
   text-align: center;
+}
+
+.image-container{
+  min-height: 200px;
+  background-size: cover;
 }
