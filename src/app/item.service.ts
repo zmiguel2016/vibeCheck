@@ -18,23 +18,32 @@ export class ItemService {
     this.friends.length=0;
     this.users.length=0;
   }
-   getFeed(){
+   async getFeed(){
     this.postRefresh();
+    //keeps for only friends or self post
+    let friendsuid= await this.pullFriends();
+    let friendEmail= []
+    for(let i=0; i< friendsuid.length; i++){
+      friendEmail.push(friendsuid[i].email)
+    }
+    friendEmail.push(this.user.getUser())
     let store = this.afstore.collection('post');
     let Items =  store.get()
     .toPromise()
     .then(snapshot => {
       snapshot.forEach(doc => {
+        if(friendEmail.includes(doc.data().username)){
         this.post.push(doc.data())
+        }
       });
     })
   	return this.post;
   }
 
-  getFriends(){
+  async getFriends(){
     this.postRefresh();
     let store = this.afstore.collection(`users/${this.user.getUID()}/friends`)
-    let Items =  store.get()
+    let Items =  await store.get()
     .toPromise()
     .then(snapshot => {
       snapshot.forEach(doc => {
@@ -44,11 +53,11 @@ export class ItemService {
   	return this.users;
   }
 
-  pullFriends(){
+  async pullFriends(){
      this.postRefresh();
-    this.getFriends();
-    let store = this.afstore.collection(`users`)
-    let Items =  store.get()
+    await this.getFriends();
+    let store =  this.afstore.collection(`users`)
+    let Items =  await store.get()
     .toPromise()
     .then(snapshot => {
       snapshot.forEach(doc => {

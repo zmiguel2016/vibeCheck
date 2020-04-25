@@ -40,10 +40,10 @@ export class Tab1Page {
     this.friends=[];
   }
 
-  loadFriends(){
+  async loadFriends(){
     //this.itemService.postRefresh();
     this.friends=[];
-    this.friends = this.itemService.pullFriends();
+    this.friends = await this.itemService.pullFriends();
 
     console.log(this.friends)
   }
