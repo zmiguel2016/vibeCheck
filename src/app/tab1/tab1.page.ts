@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { FriendsService } from '../friends.service';
+import { ItemService } from '../item.service';
 //import { NavController } from 'ionic-angular';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 @Component({
@@ -9,19 +9,44 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-  friends = [{"name":"helloWorld", "gmail":"helloworld@gmail.com"}]
+  friends = []
+  showProgress : any;
 
 
 
 
-  constructor(private router: Router, 
-    //public friendsService: FriendsService
+  constructor(private router: Router, public itemService: ItemService
+   
     ) {}
   
 
-  // ngOnInit() {
-  //   this.friends = this.friendsService.getFriends();
-  // }
+  ngOnInit() {
+  
+   }
+
+   ionViewDidEnter(){
+     this.loadFriends();
+   }
+   async doRefresh(event) {
+    this.showProgress = 1;
+    this.reset();
+    await this.loadFriends();
+    setTimeout(() => {
+      event.target.complete();
+    }, 10);
+    this.showProgress = 0;
+  }
+  reset(){
+    this.friends=[];
+  }
+
+  loadFriends(){
+    //this.itemService.postRefresh();
+    this.friends=[];
+    this.friends = this.itemService.pullFriends();
+
+    console.log(this.friends)
+  }
 
   addFriend(){
     this.router.navigate(["/add-friends"])

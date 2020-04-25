@@ -9,10 +9,14 @@ import * as firebase from 'firebase';
 })
 export class ItemService {
   private post:Array<any>=[];
+  private users:Array<any>=[];
+  private friends:Array<any>=[];
   constructor(public afstore: AngularFirestore, public user: AuthService) { }
 
   postRefresh(){
     this.post.length=0;
+    this.friends.length=0;
+    this.users.length=0;
   }
    getFeed(){
     this.postRefresh();
@@ -25,6 +29,39 @@ export class ItemService {
       });
     })
   	return this.post;
+  }
+
+  getFriends(){
+    this.postRefresh();
+    let store = this.afstore.collection(`users/${this.user.getUID()}/friends`)
+    let Items =  store.get()
+    .toPromise()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        this.users.push(doc.data())
+      });
+    })
+  	return this.users;
+  }
+
+  pullFriends(){
+     this.postRefresh();
+    this.getFriends();
+    let store = this.afstore.collection(`users`)
+    let Items =  store.get()
+    .toPromise()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        for(let i =0; i< this.users.length; i++){
+        if(doc.id == this.users[i].uid){
+        this.friends.push(doc.data())
+        }else{
+          //console.log("usernot found")
+        }
+      }
+      });
+    })
+    return this.friends;
   }
 
   createPost(title){

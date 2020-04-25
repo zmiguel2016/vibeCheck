@@ -3,11 +3,11 @@ import { firestore } from 'firebase/app';
 import { Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FriendsService } from '../friends.service';
 import { AlertController } from '@ionic/angular';
 import { AuthService } from '../auth.service';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+import { ItemService } from '../item.service';
 @Component({
   selector: 'app-add-friends',
   templateUrl: './add-friends.page.html',
@@ -20,30 +20,55 @@ export class AddFriendsPage implements OnInit {
   constructor(
   private router: Router,
   public formBuilder: FormBuilder,
-  public friendsService: FriendsService,
   public afstore: AngularFirestore,
-  public authService: AuthService,public alert: AlertController,
-  
-  ) {
-    this.getFriendList().then( friends => this.friendList = friends);
-   }
+  public user: AuthService,public alert: AlertController,
+  public itemService: ItemService
+  ) {}
   ngOnInit() {
 
   }
-  //function to add friend 
-  //it should take an email address 
-  //once you click the done button, it should serch the database and find the friend. 
-  addFriend(name: string, email: string) { 
-    return firebase.firestore().collection('friends').doc(email).set({name, email});
+  
+  async addFriend(email: string) { 
+    console.log(email)
+    let friends = await this.itemService.pullFriends();
+    let friendsemail=[]
+    console.log(friends.length)
+    for(let i=0; i< friends.length; i++){
+      friendsemail[i].push(friends[i].email)
+    }
+    console.log("Friends" ,friendsemail)
+    let randomId = Math.random().toString(36).substr(2, 20);
+    let store = this.afstore.collection(`users`)
+    let Items =  store.get()
+    .toPromise()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        if(doc.data().email == email){
+          let data = {
+            uid: doc.data().uid
+          }
+          if(friendsemail.includes(email)){
+            console.log("whoops")
+            return;
+          }else{
+        let setDoc = this.afstore.collection(`users/${this.user.getUID()}/friends`).doc(randomId).set(data)
+        console.log("friend added")
+        return;
+        }
+        }else{
+          console.log("usernot found")
+        }
+      
+      });
+    })
+    
   }
 
   // addContact(name: string, email: string) {
   //   return firebase.firestore().collection('contacts').add({name, email});
   // }
 
-  getFriendList() {
-    return firebase.firestore().collection('friends').get();
-  }
+  
   // getFriends(friendsId: string) {
   //   return firebase.firestore().collection('friends').doc(friendsId).get()
   // }

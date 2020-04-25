@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Home 
+      Friends Page
     </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="addFriend()">
@@ -12,8 +12,29 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  
-  
+  <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="arrow-dropdown"
+        pullingText="Pull to refresh"
+        refreshingSpinner="circles"
+        refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
+    <ion-progress-bar *ngIf="showProgress == 1"  type="indeterminate"></ion-progress-bar>
+    
+    <ion-list>
+      <ion-item *ngFor="let friend of friends">
+        <ion-thumbnail slot="end"> 
+          <ion-img [src]="friend.image"></ion-img>
+
+         </ion-thumbnail>
+
+  <ion-label>
+    {{ friend.email }}
+  </ion-label>
+</ion-item>
+    </ion-list>
 
   
   
