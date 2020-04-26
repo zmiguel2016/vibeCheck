@@ -1,8 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title style="text-align:center;">
-      Profile
+    <ion-title style="text-align:left">
+      Memories
     </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab2">
+        <!--<ion-icon slot="icon-only" name="add-circle"></ion-icon>-->
+      </ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,8 +18,18 @@
     </ion-toolbar>
   </ion-header>-->
 
-  <ion-avatar class="avatars">
-    <img src="https://firebasestorage.googleapis.com/v0/b/vibecheck-83aa3.appspot.com/o/user_profile%2Fprofile_pic_vibin.jpg?alt=media&token=b5530e6d-c074-4191-9751-13c423d85243">
-  </ion-avatar>
+  <!--<ion-avatar class="avatars">
+    <img src="image.img">
+  </ion-avatar>-->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeLg="4" sizeMd="4" sizeXs="6" *ngFor="let image of images">
+        <div class="image-container">
+          <ion-img [src]="image.img"></ion-img>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

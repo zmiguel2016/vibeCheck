@@ -12,6 +12,7 @@ export class ItemService {
   private post:Array<any>=[];
   private users:Array<any>=[];
   private friends:Array<any>=[];
+  private memories:Array<any>=[];
   constructor(public afstore: AngularFirestore, public user: AuthService) { }
 
   postRefresh(){
@@ -65,6 +66,40 @@ export class ItemService {
         for(let i =0; i< this.users.length; i++){
         if(doc.id == this.users[i].uid){
         this.friends.push(doc.data())
+      }else{
+        //console.log("usernot found")
+      }
+    }
+    });
+  })
+  return this.friends;
+}
+
+
+  getImages(){
+    for (let i=0; i<this.post.length; i++){
+
+      if (this.post[i].username == this.user.getUser()){
+        this.memories.push(this.post[i])
+        console.log("Success")
+      }else{
+        console.log("Failed")
+      }
+    }
+    return this.memories;
+  } 
+  /*getImages(){
+    this.postRefresh();
+    let af = this.afstore.collection('post');
+    let Items2 =  af.get()
+    .toPromise()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        console.log(doc.data().username)
+        //console.log(this.user.getUser(), "getUser")
+        if (doc.data().username.equals(this.user.getUser())) {
+          console.log("Image pulled")
+            this.memories.push(doc.data())   
         }else{
           //console.log("usernot found")
         }
@@ -73,6 +108,7 @@ export class ItemService {
     })
     return this.friends;
   }
+  */
 
   createPost(title){
     let randomId = Math.random().toString(36).substr(2, 5);
