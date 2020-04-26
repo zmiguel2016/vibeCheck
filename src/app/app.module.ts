@@ -16,7 +16,8 @@ import { FormsModule } from '@angular/forms'
 import { ReactiveFormsModule} from '@angular/forms' 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthService } from './auth.service';
-
+import { Camera } from '@ionic-native/camera/ngx';
+import { File } from "@ionic-native/file/ngx";
 
 
 @NgModule({
@@ -33,6 +34,8 @@ import { AuthService } from './auth.service';
   providers: [AuthService,
     StatusBar,
     SplashScreen,
+    Camera,
+    File,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AngularFirestore
     

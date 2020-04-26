@@ -10,43 +10,69 @@ import * as firebase from 'firebase';
 export class ItemService {
 
   private post:Array<any>=[];
-  private memories:Array<any>=[];
-
+  private users:Array<any>=[];
+  private friends:Array<any>=[];
   constructor(public afstore: AngularFirestore, public user: AuthService) { }
 
   postRefresh(){
     this.post.length=0;
-    this.memories.length=0;
+    this.friends.length=0;
+    this.users.length=0;
   }
-  getFeed(){
+   async getFeed(){
     this.postRefresh();
+    //keeps for only friends or self post
+    let friendsuid= await this.pullFriends();
+    let friendEmail= []
+    for(let i=0; i< friendsuid.length; i++){
+      friendEmail.push(friendsuid[i].email)
+    }
+    friendEmail.push(this.user.getUser())
     let store = this.afstore.collection('post');
     let Items =  store.get()
     .toPromise()
     .then(snapshot => {
       snapshot.forEach(doc => {
+        if(friendEmail.includes(doc.data().username)){
         this.post.push(doc.data())
+        }
       });
     })
   	return this.post;
   }
 
-  getImages(){
+  async getFriends(){
     this.postRefresh();
-    let store = this.afstore.collection('post');
-    let Items =  store.get()
+    let store = this.afstore.collection(`users/${this.user.getUID()}/friends`)
+    let Items =  await store.get()
     .toPromise()
     .then(snapshot => {
-    snapshot.forEach(doc => {
-        if (doc.data().username == this.user.getUser()) {
-            this.memories.push(doc.data())
+      snapshot.forEach(doc => {
+        this.users.push(doc.data())
+      });
+    })
+  	return this.users;
+  }
+
+  async pullFriends(){
+     this.postRefresh();
+    await this.getFriends();
+    let store =  this.afstore.collection(`users`)
+    let Items =  await store.get()
+    .toPromise()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        for(let i =0; i< this.users.length; i++){
+        if(doc.id == this.users[i].uid){
+        this.friends.push(doc.data())
         }else{
-            console.log("Not in user storage");
+          //console.log("usernot found")
         }
-  });
-})
-return this.memories;
-}
+      }
+      });
+    })
+    return this.friends;
+  }
 
   createPost(title){
     let randomId = Math.random().toString(36).substr(2, 5);

@@ -1,5 +1,7 @@
 {
   "name": "vibeCheck",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

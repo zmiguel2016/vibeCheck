@@ -29,10 +29,10 @@ posts=[]
       }, 10);
       this.showProgress = 0;
     }
-    loadItems(){
+    async loadItems(){
       //this.itemService.postRefresh();
       this.posts=[];
-      this.posts = this.itemService.getFeed();
+      this.posts = await this.itemService.getFeed();
       console.log(this.posts)
     }
     reset(){
