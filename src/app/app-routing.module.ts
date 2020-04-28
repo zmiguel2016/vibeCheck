@@ -28,13 +28,18 @@ const routes: Routes = [
     loadChildren: () => import('./post-detail/post-detail.module').then( m => m.PostDetailPageModule)
   },
   {
-    path: 'add-friends',
+    path: 'addFriends',
+    loadChildren: () => import('./add-friends/add-friends.module').then( m => m.AddFriendsPageModule)
+  },
+  {
+    path: 'addFriends/:id',
     loadChildren: () => import('./add-friends/add-friends.module').then( m => m.AddFriendsPageModule)
   },
   {
     path: 'previewpage',
     loadChildren: () => import('./previewpage/previewpage.module').then( m => m.PreviewpagePageModule)
   }
+  
 ];
 @NgModule({
   imports: [
