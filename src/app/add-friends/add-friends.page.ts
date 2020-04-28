@@ -39,7 +39,7 @@ friendList: any;
     console.log("Friends" ,friendsemail)
     let randomId = Math.random().toString(36).substr(2, 20);
     let store = this.afstore.collection(`users`)
-    let Items =  store.get()
+    let Items =  await store.get()
     .toPromise()
     .then(snapshot => {
       snapshot.forEach(doc => {
@@ -47,9 +47,14 @@ friendList: any;
           let data = {
             uid: doc.data().uid
           }
+          if(doc.data().uid == this.user.getUID()){
+            console.log("yoself")
+            return;
+          }
           if(friendsemail.includes(email)){
             console.log("whoops")
             return;
+
           }else{
         let setDoc = this.afstore.collection(`users/${this.user.getUID()}/friends`).doc(randomId).set(data)
         console.log("friend added")
