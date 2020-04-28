@@ -1,74 +1,58 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemService } from '../item.service';
 //import { NavController } from 'ionic-angular';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import { Friend, FriendsService } from './../friends.service';
-import { AuthService } from '../auth.service';
-import { ThemeService } from '../services/theme.service';
-
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit {
-  friends: Friend[];
-  //friends = []
-  //showProgress : any;
+export class Tab1Page {
+  friends = []
+  showProgress : any;
 
-  constructor(private router: Router, public itemService: ItemService, private friendsService: FriendsService , private theme: ThemeService) { }
-  ngOnInit(){
-    this.friendsService.getFriends().subscribe(res => {
-      this.friends = res;
-  });
-}
 
-    enableDark(){
-      console.log("you enabled dark mode")
-    //this.theme.enableDark();
+
+
+  constructor(private router: Router, public itemService: ItemService
+   
+    ) {}
+  
+
+  ngOnInit() {
+  
+   }
+
+   ionViewDidEnter(){
+     this.loadFriends();
+   }
+   async doRefresh(event) {
+    this.showProgress = 1;
+    this.reset();
+    await this.loadFriends();
+    setTimeout(() => {
+      event.target.complete();
+    }, 10);
+    this.showProgress = 0;
+  }
+  reset(){
+    this.friends=[];
   }
 
-enableLight(){
-  console.log("you enabled light mode")
-    //this.theme.enableLight();
+  async loadFriends(){
+    //this.itemService.postRefresh();
+    this.friends=[];
+    this.friends = await this.itemService.pullFriends();
+
+    console.log(this.friends)
   }
-  remove(item){
-    this.friendsService.removeFriend(item.id);
+
+  addFriend(){
+    this.router.navigate(["/add-friends"])
   }
-
-  logout(){
-      console.log("you clicked logout")
-      this.router.navigate(['/login'])
-  }
-}
-  //  ionViewDidEnter(){
-  //    this.loadFriends();
-  //  }
-//    async doRefresh(event) {
-//     this.showProgress = 1;
-//     this.reset();
-//     await this.loadFriends();
-//     setTimeout(() => {
-//       event.target.complete();
-//     }, 10);
-//     this.showProgress = 0;
-//   }
-//   reset(){
-//     this.friends=[];
-//   }
-
-//   async loadFriends(){
-//     //this.itemService.postRefresh();
-//     this.friends=[];
-//     this.friends = await this.itemService.pullFriends();
-
-//     console.log(this.friends)
-//   }
-
-//   addFriend(){
-//     this.router.navigate(["/add-friends"])
-//   }
   // go(){
   //   console.log("add friends button is clicked")
-  //   this.router.navigate(['add-friends']);}}
+  //   //this.router.navigate(['add-friends']);
+  //   }
+}

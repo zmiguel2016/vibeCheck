@@ -28,11 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./post-detail/post-detail.module').then( m => m.PostDetailPageModule)
   },
   {
-    path: 'addFriends',
-    loadChildren: () => import('./add-friends/add-friends.module').then( m => m.AddFriendsPageModule)
-  },
-  {
-    path: 'addFriends/:id',
+    path: 'add-friends',
     loadChildren: () => import('./add-friends/add-friends.module').then( m => m.AddFriendsPageModule)
   },
   {
