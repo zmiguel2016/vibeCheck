@@ -35,7 +35,6 @@ const routes: Routes = [
     path: 'previewpage',
     loadChildren: () => import('./previewpage/previewpage.module').then( m => m.PreviewpagePageModule)
   }
-  
 ];
 @NgModule({
   imports: [

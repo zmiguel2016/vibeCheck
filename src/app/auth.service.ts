@@ -17,10 +17,9 @@ export class AuthService {
   // }
   user: Observable<firebase.User>;
   uid:string
-  auth: any;
  
 
-  constructor(private _router: Router,private firebaseAuth: AngularFireAuth,public afStore: AngularFirestore) { 
+  constructor(private router: Router,private firebaseAuth: AngularFireAuth,public afStore: AngularFirestore) { 
     this.user = firebaseAuth.authState;
   }
   async signup(email: string, password: string) {
@@ -34,7 +33,7 @@ export class AuthService {
       .then(value => {
         //this.uid=res.user.uid
         console.log('Success!', this.getUID()); 
-        this._router.navigate(['/tabs/tab2']);
+        this.router.navigate(['/tabs/tab2']);
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
@@ -48,7 +47,7 @@ login(email: string, password: string) {
       .then(value => {
        //this.uid=res.user.uid
         console.log('Nice, it worked!', this.getUID());
-        this._router.navigate(['/tabs/tab2']);
+        this.router.navigate(['/tabs/tab2']);
       })
       .catch(err => {
         console.log('Something went wrong:',err.message);
@@ -70,12 +69,11 @@ login(email: string, password: string) {
   //       console.log('Something went wrong:',err.message);
   //     });    
   // }
-  // logout() {
-  //   console.log("you clicked logout")
-  //   this.auth.logout();
-  //     // //localStorage.removeItem('token')
-  //     // this._router.navigate(['/login'])
-  // }
+  logout() {
+    this.firebaseAuth
+      .auth
+      .signOut();
+  }
 
   getUID(){
     return this.firebaseAuth.auth.currentUser.uid
@@ -90,7 +88,7 @@ login(email: string, password: string) {
     if(loguser){
       return true
     }
-    this._router.navigate(['/login'])
+    this.router.navigate(['/login'])
     return false
   }
 

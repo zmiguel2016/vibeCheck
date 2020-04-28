@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import {Router } from '@angular/router'
-//import { AuthService } from './auth.service';
+
 import { ItemService } from '../item.service';
-import { AuthService } from '../auth.service';
-//import { ThemeService } from '../services/theme.service';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -13,21 +11,12 @@ export class Tab2Page {
 showProgress : any;
 posts=[]
   constructor(private router: Router,
-    public itemService: ItemService,//, private theme: ThemeService
-    private _authSerivice: AuthService
-    ) {}
+    public itemService: ItemService) {}
 
 
-    ngOnInit()
-  {}
-//     enableDark(){
-//     this.theme.enableDark();
-//   }
-
-// enableLight(){
-//     this.theme.enableLight();
-//   }
-    
+    ngOnInit(){
+  
+    }
     ionViewDidEnter(){
       this.loadItems();
     }

@@ -4,7 +4,6 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 //import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -18,7 +17,6 @@ export class AppComponent {
     private statusBar: StatusBar,
     //private fb = FormBuilder
     //private route: ActivatedRoute
-   
   ) 
   {
    // this.control = fb.control({value: 'my val', disabled: true()

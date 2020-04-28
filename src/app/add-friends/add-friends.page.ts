@@ -14,9 +14,8 @@ import { ItemService } from '../item.service';
   styleUrls: ['./add-friends.page.scss'],
 })
 export class AddFriendsPage implements OnInit {
-
-
- friendList: any;
+  friendsemail: Array<any> = [];
+friendList: any;
   constructor(
   private router: Router,
   public formBuilder: FormBuilder,
@@ -31,10 +30,11 @@ export class AddFriendsPage implements OnInit {
   async addFriend(email: string) { 
     console.log(email)
     let friends = await this.itemService.pullFriends();
-    let friendsemail=[]
-    console.log(friends.length)
+    let friendsemail=[];
+    console.log(friends)
     for(let i=0; i< friends.length; i++){
-      friendsemail[i].push(friends[i].email)
+      //console.log("email", friends[i].email.toString())
+      friendsemail.push(friends[i].email)
     }
     console.log("Friends" ,friendsemail)
     let randomId = Math.random().toString(36).substr(2, 20);
@@ -90,6 +90,6 @@ export class AddFriendsPage implements OnInit {
 
 
   
- 
+ 
 
 }
