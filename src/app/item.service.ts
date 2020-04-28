@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { firestore } from 'firebase/app';
 import { AuthService } from './auth.service';
 import * as firebase from 'firebase';
+import { ActivatedRouteSnapshot } from '@angular/router';
+import { VirtualTimeScheduler } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,7 @@ export class ItemService {
   private users:Array<any>=[];
   private friends:Array<any>=[];
   private memories:Array<any>=[];
+  private image:any;
   constructor(public afstore: AngularFirestore, public user: AuthService) { }
 
   postRefresh(){
@@ -56,7 +59,7 @@ export class ItemService {
   }
 
   async pullFriends(){
-     this.postRefresh();
+    this.postRefresh();
     await this.getFriends();
     let store =  this.afstore.collection(`users`)
     let Items =  await store.get()
@@ -75,8 +78,21 @@ export class ItemService {
   return this.friends;
 }
 
+  async getProfilePic(){
+    let a = this.afstore.collection(`users`).doc(this.user.getUID())
+    let b = await a.get()
+    .toPromise()
+    .then(doc =>{
+      //console.log(doc.data());
+      this.image = doc.data().image;
+      //console.log("img:" ,this.image)
+    })
+  
+    return this.image;
+  }
 
   getImages(){
+    this.memories.length = 0;
     for (let i=0; i<this.post.length; i++){
 
       if (this.post[i].username == this.user.getUser()){

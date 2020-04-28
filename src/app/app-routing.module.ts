@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'add-friends',
     loadChildren: () => import('./add-friends/add-friends.module').then( m => m.AddFriendsPageModule)
+  },
+  {
+    path: 'memories',
+    loadChildren: () => import('./memories/memories.module').then( m => m.MemoriesPageModule)
   }
 ];
 @NgModule({

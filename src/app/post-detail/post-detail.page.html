@@ -1,9 +1,12 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>{{currentpost.vibe}}</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-button slot="end" (click)="openMemoriesPage()">
+      <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
