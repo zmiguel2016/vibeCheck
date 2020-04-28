@@ -26,4 +26,8 @@ export class PostDetailPage implements OnInit {
    // console.log(this.currentpost)
   }
 
+  openMemoriesPage(){
+    this.router.navigate(["/memories"]);
+  }
+
 }

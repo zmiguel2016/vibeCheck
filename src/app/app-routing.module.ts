@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'previewpage',
     loadChildren: () => import('./previewpage/previewpage.module').then( m => m.PreviewpagePageModule)
+  },
+  {
+    path: 'memories',
+    loadChildren: () => import('./memories/memories.module').then( m => m.MemoriesPageModule)
   }
 ];
 @NgModule({
