@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'add-friends',
     loadChildren: () => import('./add-friends/add-friends.module').then( m => m.AddFriendsPageModule)
+  },
+  {
+    path: 'previewpage',
+    loadChildren: () => import('./previewpage/previewpage.module').then( m => m.PreviewpagePageModule)
   }
 ];
 @NgModule({

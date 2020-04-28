@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>{{currentpost.vibe}}</ion-title>
+    <ion-title>Vibe Check!</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -10,9 +10,15 @@
 <ion-content>
 <ion-card>
     <img [src]="currentpost.img">
-    <ion-item>
-      <h2>{{currentpost.username}} says  "{{currentpost.title}}"</h2>
+    
+</ion-card>
+<ion-card>
+  <ion-item>
+    <h2> Vibe: {{currentpost.vibe}}</h2>
+  </ion-item>
+  <ion-item>
+    <em>{{currentpost.username}} says  "{{currentpost.title}}"</em>
 
-    </ion-item>
+  </ion-item>
 </ion-card>
 </ion-content>

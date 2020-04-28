@@ -77,6 +77,7 @@ export class ItemService {
 
 
   getImages(){
+    this.memories.length=0;
     for (let i=0; i<this.post.length; i++){
 
       if (this.post[i].username == this.user.getUser()){

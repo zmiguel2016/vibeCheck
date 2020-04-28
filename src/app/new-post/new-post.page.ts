@@ -46,8 +46,8 @@ export class NewPostPage implements OnInit {
     
     
     let setDoc = this.afstore.collection('post').doc(randomId).set(data)
-  
-  	this.goBack();
+    
+  	this.preview(data);
   }
 
   vibeCheck(title){
@@ -237,8 +237,8 @@ if(title.includes('plur')){
   }
 
 
-  goBack(){
-    this.router.navigate(['/tabs/tab2']);
+  preview(data){
+    this.router.navigate(['/previewpage', data]);
 }
 
 }

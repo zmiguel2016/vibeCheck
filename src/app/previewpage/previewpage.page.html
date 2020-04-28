@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Your Vibe Check!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img [src]="currentpost.img">
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <h2>Your Vibe: "{{currentpost.vibe}}"</h2>
+      
+    </ion-item>
+    <ion-item>
+      <em>Caption: "{{currentpost.title}}"</em>
+
+    </ion-item>
+  </ion-card>
+
+<ion-button (click)= "goToFeed()">Such a Vibe!</ion-button>
+<ion-button (click)= "deletePost()">Not Feeling the Vibe :/</ion-button>
+</ion-content>
