@@ -54,6 +54,10 @@ const routes: Routes = [
   {
     path: 'update-info',
     loadChildren: () => import('./update-info/update-info.module').then( m => m.UpdateInfoPageModule)
+  },
+  {
+    path: 'image-detail',
+    loadChildren: () => import('./image-detail/image-detail.module').then( m => m.ImageDetailPageModule)
   }
 ];
 @NgModule({

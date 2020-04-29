@@ -87,19 +87,18 @@ export class ItemService {
     return this.image;
   }
 
-  getImages(){
+ async getImages(){
     this.memories.length = 0;
     for (let i=0; i<this.post.length; i++){
 
       if (this.post[i].uid == this.user.getUID()){
         this.memories.push(this.post[i])
-        console.log("Success")
-      }else{
-        console.log("Failed")
+        //console.log("Success")
       }
     }
     return this.memories;
   } 
+ 
 
   createPost(title){
     let randomId = Math.random().toString(36).substr(2, 5);
@@ -112,6 +111,17 @@ export class ItemService {
   deleteItem(id){
     let setDoc = this.afstore.collection('post').doc(id).delete();
     console.log("Item deleted:"+id)
+}
+
+updateItem(newValues){
+  let setDoc = this.afstore.collection('post').doc(newValues.id).update(newValues)
+ // let itemIndex = this.items.findIndex(item => item.id == newValues.id);
+ // if(newValues.img == undefined){
+ // 	newValues.img = this.items[itemIndex].img
+//  }
+
+  //this.items[itemIndex] = newValues;
+ // console.log(newValues.img);
 }
 
 

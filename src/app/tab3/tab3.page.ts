@@ -11,12 +11,15 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class Tab3Page {
   showProgress : any;
+  post:any;
   images = [];
   profilePic : String;
   constructor(public itemService: ItemService, private router: Router,public afstore: AngularFirestore, public user: AuthService) {}
-
-  ionViewDidEnter(){
-    this.reset();
+ ngOnInit(){
+  }
+ ionViewDidEnter(){
+    //this.reset();
+    //this.itemService.myPost();
     this.loadImages();
     this.loadProfilePic();
   }
@@ -44,14 +47,21 @@ export class Tab3Page {
   
     return this.profilePic;
   }
-  loadImages(){
-    this.images=[];
-    this.images = this.itemService.getImages();
+ async loadImages(){
+   this.images=[];
+    this.images = await this.itemService.getImages();
+    console.log(this.images)
   }
+ 
+
   reset(){
     this.images=[];
   }  
   goToSettings(){
     this.router.navigate(["/settings"])
+  }
+
+  goToImage(image){
+    this.router.navigate(["/image-detail",image])
   }
 }

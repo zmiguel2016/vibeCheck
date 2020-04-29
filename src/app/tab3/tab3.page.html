@@ -10,17 +10,23 @@
         <ion-icon slot="icon-only" name="build-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <!--<ion-title style="text-align:left">
-      Profile
-    </ion-title>-->
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-progress-bar *ngIf="showProgress == 1"  type="indeterminate"></ion-progress-bar>
 
   <ion-grid>
     <ion-row>
-      <ion-col sizeLg="4" sizeMd="4" sizeXs="4" *ngFor="let image of images">
+      <ion-col sizeLg="4" sizeMd="4" sizeXs="4" *ngFor="let image of images" (click)=goToImage(image)>
         <div class="image-container">
           <ion-img [src]="image.img"></ion-img>
         </div>

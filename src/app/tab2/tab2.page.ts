@@ -32,7 +32,7 @@ posts=[]
     async loadItems(){
       this.posts=[];
       this.posts = await this.itemService.getFeed();
-      console.log(this.posts)
+      //console.log(this.posts)
     }
     reset(){
       this.posts=[];
