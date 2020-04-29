@@ -59,4 +59,7 @@ export class Tab3Page {
   reset(){
     this.images=[];
   }  
+  goToSettings(){
+    this.router.navigate(["/settings"])
+  }
 }

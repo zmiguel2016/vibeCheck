@@ -22,13 +22,15 @@ export class AuthService {
   constructor(private router: Router,private firebaseAuth: AngularFireAuth,public afStore: AngularFirestore) { 
     this.user = firebaseAuth.authState;
   }
-  async signup(email: string, password: string) {
+  async signup(email: string, password: string, fname: string, lname: string) {
     const res =await this.firebaseAuth
       .auth
       .createUserWithEmailAndPassword(email, password)
       this.afStore.doc(`users/${res.user.uid}`).set({
         email,
-        uid: res.user.uid
+        uid: res.user.uid,
+        fname,
+        lname,
       })
       .then(value => {
         //this.uid=res.user.uid
@@ -82,6 +84,7 @@ login(email: string, password: string) {
   getUser(){
     return this.firebaseAuth.auth.currentUser.email
   }
+  
 
   async canActivate(route){
     var loguser = this.firebaseAuth.auth.currentUser
@@ -91,6 +94,7 @@ login(email: string, password: string) {
     this.router.navigate(['/login'])
     return false
   }
+
 
 }
 

@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class RegisterPage implements OnInit {
   email:string;
   password: string;
+  fname:string;
+  lname:string;
   cpassword:string;
   constructor(public authService: AuthService,public alert: AlertController,private router: Router) { }
 
@@ -22,8 +24,8 @@ export class RegisterPage implements OnInit {
       this.showAlert("Error!","Passwords don't match")
       return console.error("Passwords don't match")
     }
-    this.authService.signup(this.email, this.password);
-    this.email = this.password = '';
+    this.authService.signup(this.email, this.password, this.fname, this.lname);
+    this.email = this.password = this.fname =this.lname = '';
   }
   async showAlert(header: string, message: string){
     const alert  = await this.alert.create({
