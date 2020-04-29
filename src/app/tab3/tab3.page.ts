@@ -18,7 +18,6 @@ export class Tab3Page {
   ionViewDidEnter(){
     this.reset();
     this.loadImages();
-    //this.loadProfilePic();
     this.loadProfilePic();
   }
   async doRefresh(event) {
@@ -34,19 +33,13 @@ export class Tab3Page {
   goToFeed(){
     this.router.navigate(["/tabs/tab2"])
   }
-  /*loadProfilePic(){
-    this.profilePic="";
-    this.profilePic = this.itemService.getProfilePic();
-    console.log("this.profile", this.profilePic)
-  }*/
+  
   async loadProfilePic(){
     let a = this.afstore.collection(`users`).doc(this.user.getUID())
     let b = await a.get()
     .toPromise()
     .then(doc =>{
-      //console.log(doc.data());
       this.profilePic = doc.data().image;
-      //console.log("img:" ,this.image)
     })
   
     return this.profilePic;
@@ -54,7 +47,6 @@ export class Tab3Page {
   loadImages(){
     this.images=[];
     this.images = this.itemService.getImages();
-    console.log(this.images)
   }
   reset(){
     this.images=[];

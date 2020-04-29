@@ -3,8 +3,6 @@ import { NavigationExtras, Router, Routes, RouterModule } from '@angular/router'
 import { IonicModule, AlertController, NavController } from '@ionic/angular';
 import { ItemService } from '../item.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
-//import { Storage } from '@ionic/storage';
 import * as firebase from 'firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../auth.service';
@@ -22,7 +20,6 @@ export class UpdateEmailPage implements OnInit {
     public itemService: ItemService,
     public formBuilder: FormBuilder,
     public db: AngularFirestore,
-    //private storage: Storage,
     public alertController: AlertController,public user: AuthService) {this.getEmail()}
 
   ngOnInit() {
@@ -47,19 +44,17 @@ export class UpdateEmailPage implements OnInit {
    * @return undefined
    */
   async update(value) {
+    var oldemail = this.user.getUser();
     var user = firebase.auth().currentUser;
     var self = this;
     await user.updateEmail(value.email).then(() => {
       this.updateDB(value);
-      var changes = {
-        email: value.email
-      }
-      self.currentLogin.email = value.email;
+      this.updateUN(value, oldemail);
       self.presentAlert("Email Updated", "poof");
+      self.currentLogin.email = value.email;
       return;
-      this.router.navigate(['/user-settings',changes]);
+      
     }).catch((error) => {
-      //self.presentAlert("Email Updated", "poof");
       self.presentAlert("Invalid Email","Email already exists");
       this.router.navigate(['/settings']);
       return;
@@ -82,6 +77,23 @@ export class UpdateEmailPage implements OnInit {
     .catch(function (error) {
       self.presentAlert(error.errorCode, error.errorMessage);
     });
+  }
+  updateUN(value, oldemail){
+   
+    var user = firebase.auth().currentUser;
+    var self = this;
+    let postU = firebase.firestore().collection('post')
+    let allPost = postU.get()
+    .then(snapshot => {
+      snapshot.forEach(doc => {
+        if(doc.data().username == oldemail){
+          let update = this.db.collection('post').doc(doc.id).update({
+            "username": value.email
+          })
+        }
+      });
+    })
+    
   }
 
   /**

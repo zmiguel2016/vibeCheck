@@ -33,29 +33,23 @@ export class NewPostPage implements OnInit {
   }
 
   createItem(value){
-  //console.log(value.BS);
-  	
     let randomId = Math.random().toString(36).substr(2, 20);
     let data = {
     id: randomId,
     title: value.title,
     vibe: this.vibeCheck(value.title),
     username: this.authService.getUser(),
+    uid: this.authService.getUID(),
     img: this.imgfile
     }
-    
-    
     let setDoc = this.afstore.collection('post').doc(randomId).set(data)
     
   	this.preview(data);
   }
 
   vibeCheck(title){
-    console.log(title)
-    console.log(this.getVibe(title))
     let vibe = getRandomIntInclusive(0,4) + this.getVibe(title)
     let post;
-    console.log(vibe)
     if(vibe ==0){
       post = "awful vibes oof"
       

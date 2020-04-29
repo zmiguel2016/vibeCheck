@@ -46,8 +46,6 @@ export class ChangePasswordPage implements OnInit {
         self.presentAlert("password updated", "hurray");
         self.currentLogin.password = value.confirmpassword;
         return;
-       // self.storage.set('login', self.currentLogin);
-        self.router.navigate(['/settings']);
       }).catch(function(error) {
         self.presentAlert(error.code, error.message); //firebase error
       });

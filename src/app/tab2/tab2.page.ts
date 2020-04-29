@@ -30,7 +30,6 @@ posts=[]
       this.showProgress = 0;
     }
     async loadItems(){
-      //this.itemService.postRefresh();
       this.posts=[];
       this.posts = await this.itemService.getFeed();
       console.log(this.posts)

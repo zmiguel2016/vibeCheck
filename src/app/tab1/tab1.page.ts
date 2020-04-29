@@ -12,12 +12,7 @@ export class Tab1Page {
   friends = []
   showProgress : any;
 
-
-
-
-  constructor(private router: Router, public itemService: ItemService
-   
-    ) {}
+  constructor(private router: Router, public itemService: ItemService) {}
   
 
   ngOnInit() {
@@ -41,11 +36,8 @@ export class Tab1Page {
   }
 
   async loadFriends(){
-    //this.itemService.postRefresh();
     this.friends=[];
     this.friends = await this.itemService.pullFriends();
-
-    console.log(this.friends)
   }
 
   goToFriend(friend){
@@ -55,8 +47,5 @@ export class Tab1Page {
   addFriend(){
     this.router.navigate(["/add-friends"])
   }
-  // go(){
-  //   console.log("add friends button is clicked")
-  //   //this.router.navigate(['add-friends']);
-  //   }
+ 
 }

@@ -25,19 +25,18 @@ export class ItemService {
   }
    async getFeed(){
     this.postRefresh();
-    //keeps for only friends or self post
     let friendsuid= await this.pullFriends();
     let friendEmail= []
     for(let i=0; i< friendsuid.length; i++){
-      friendEmail.push(friendsuid[i].email)
+      friendEmail.push(friendsuid[i].uid)
     }
-    friendEmail.push(this.user.getUser())
+    friendEmail.push(this.user.getUID())
     let store = this.afstore.collection('post');
     let Items =  store.get()
     .toPromise()
     .then(snapshot => {
       snapshot.forEach(doc => {
-        if(friendEmail.includes(doc.data().username)){
+        if(friendEmail.includes(doc.data().uid)){
         this.post.push(doc.data())
         }
       });
@@ -70,7 +69,6 @@ export class ItemService {
         if(doc.id == this.users[i].uid){
         this.friends.push(doc.data())
       }else{
-        //console.log("usernot found")
       }
     }
     });
@@ -83,9 +81,7 @@ export class ItemService {
     let b = await a.get()
     .toPromise()
     .then(doc =>{
-      //console.log(doc.data());
       this.image = doc.data().image;
-      //console.log("img:" ,this.image)
     })
   
     return this.image;
@@ -95,7 +91,7 @@ export class ItemService {
     this.memories.length = 0;
     for (let i=0; i<this.post.length; i++){
 
-      if (this.post[i].username == this.user.getUser()){
+      if (this.post[i].uid == this.user.getUID()){
         this.memories.push(this.post[i])
         console.log("Success")
       }else{
@@ -104,27 +100,6 @@ export class ItemService {
     }
     return this.memories;
   } 
-  /*getImages(){
-    this.postRefresh();
-    let af = this.afstore.collection('post');
-    let Items2 =  af.get()
-    .toPromise()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        console.log(doc.data().username)
-        //console.log(this.user.getUser(), "getUser")
-        if (doc.data().username.equals(this.user.getUser())) {
-          console.log("Image pulled")
-            this.memories.push(doc.data())   
-        }else{
-          //console.log("usernot found")
-        }
-      }
-      });
-    })
-    return this.friends;
-  }
-  */
 
   createPost(title){
     let randomId = Math.random().toString(36).substr(2, 5);

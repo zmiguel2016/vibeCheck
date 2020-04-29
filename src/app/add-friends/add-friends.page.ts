@@ -28,15 +28,11 @@ friendList: any;
   }
   
   async addFriend(email: string) { 
-    console.log(email)
     let friends = await this.itemService.pullFriends();
     let friendsemail=[];
-    console.log(friends)
     for(let i=0; i< friends.length; i++){
-      //console.log("email", friends[i].email.toString())
       friendsemail.push(friends[i].email)
     }
-    console.log("Friends" ,friendsemail)
     let randomId = Math.random().toString(36).substr(2, 20);
     let store = this.afstore.collection(`users`)
     let Items =  await store.get()
@@ -48,11 +44,9 @@ friendList: any;
             uid: doc.data().uid
           }
           if(doc.data().uid == this.user.getUID()){
-            console.log("yoself")
             return;
           }
           if(friendsemail.includes(email)){
-            console.log("whoops")
             return;
 
           }else{
@@ -69,22 +63,6 @@ friendList: any;
     
   }
 
-  // addContact(name: string, email: string) {
-  //   return firebase.firestore().collection('contacts').add({name, email});
-  // }
-
-  
-  // getFriends(friendsId: string) {
-  //   return firebase.firestore().collection('friends').doc(friendsId).get()
-  // }
- 
-  // updateFriend(friend) {
-  //   return firebase.firestore().collection('friends').doc(friend.id).update(friend);
-  // }
-
-  removeFriend(friendId): Promise<any> {
-    return firebase.firestore().collection('friends').doc(friendId).delete();
-  }
 
 
 

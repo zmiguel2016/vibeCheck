@@ -23,7 +23,6 @@ export class PostDetailPage implements OnInit {
         this.currentpost = param;
       }
     )
-   // console.log(this.currentpost)
   }
 
   openMemoriesPage(){
