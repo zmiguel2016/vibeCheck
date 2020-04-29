@@ -5,6 +5,11 @@
         <ion-img [src]="profilePic"></ion-img>
       </ion-avatar>
     </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToFriends()">
+        <ion-icon slot="icon-only" name="people-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-buttons slot="end">
       <ion-button (click)="goToSettings()">
         <ion-icon slot="icon-only" name="build-outline"></ion-icon>

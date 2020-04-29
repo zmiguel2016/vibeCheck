@@ -10,19 +10,21 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  
   showProgress : any;
-  post:any;
+  private post:Array<any>=[];
+  private posts: Array<any>=[];
   images = [];
   profilePic : String;
   constructor(public itemService: ItemService, private router: Router,public afstore: AngularFirestore, public user: AuthService) {}
- ngOnInit(){
+  ngOnInit(){
   }
- ionViewDidEnter(){
-    //this.reset();
-    //this.itemService.myPost();
+  ionViewDidEnter(){
+    this.reset();
     this.loadImages();
     this.loadProfilePic();
   }
+  
   async doRefresh(event) {
     this.showProgress = 1;
     this.reset();
@@ -31,10 +33,6 @@ export class Tab3Page {
       event.target.complete();
     }, 10);
     this.showProgress = 0;
-  }
-
-  goToFeed(){
-    this.router.navigate(["/tabs/tab2"])
   }
   
   async loadProfilePic(){
@@ -47,8 +45,9 @@ export class Tab3Page {
   
     return this.profilePic;
   }
- async loadImages(){
-   this.images=[];
+  
+  async loadImages(){
+    this.images=[];
     this.images = await this.itemService.getImages();
     console.log(this.images)
   }
@@ -63,5 +62,9 @@ export class Tab3Page {
 
   goToImage(image){
     this.router.navigate(["/image-detail",image])
+  }
+
+  goToFriends(){
+    this.router.navigate(["/tabs/tab1"])
   }
 }

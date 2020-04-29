@@ -25,8 +25,5 @@ export class PostDetailPage implements OnInit {
     )
   }
 
-  openMemoriesPage(){
-    this.router.navigate(["/memories"]);
-  }
-
+  
 }
