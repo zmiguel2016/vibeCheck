@@ -48,6 +48,10 @@ export class Tab1Page {
     console.log(this.friends)
   }
 
+  goToFriend(friend){
+    this.router.navigate(['/memories', friend])
+  }
+
   addFriend(){
     this.router.navigate(["/add-friends"])
   }
