@@ -1,8 +1,11 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
     <ion-title>Register</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button>
+        <ion-icon name="arrow-back-outline">
+        </ion-icon>
+      </ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -33,6 +36,6 @@
 
   </ion-list>
 
-  <ion-button fill="solid" expand="block" color="dark" (click)="signup()">Signup</ion-button>
+  <ion-button color="warning" fill="solid" expand="block" (click)="signup()">Signup</ion-button>
  
 </ion-content>
