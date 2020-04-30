@@ -1,24 +1,46 @@
 <ion-header>
-  <ion-toolbar>
+ <!-- <ion-toolbar>
     <ion-title>Login</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
+  <div class="login-header ion-padding">
+    <img class="logo-img" src="assets/logo.png">
+  </div>
 </ion-header>
 
+<div linespace></div>
+<ion-label>
+  Welcome to VibeCheck! 
+</ion-label>
+<ion-label>
+If you are a returning user Login. If you are a new user Register.
+</ion-label>
 <ion-content padding>
-  <ion-list>
-
-      <ion-item>
-        <ion-label postion="floating">Username</ion-label>
-        <ion-input type="text" [(ngModel)]="email"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label postion="floating">Password</ion-label>
-        <ion-input type="password" [(ngModel)]="password"></ion-input>
-      </ion-item>
-
-  </ion-list>
-
-  <ion-button fill="solid" expand="block" color="dark" (click)="login()">Login</ion-button>
-  <ion-button fill="solid" expand="block" color="dark" (click)="goToSignup()">Register</ion-button>
   
+<div class="center">
+
+  <ion-list>
+    <div heading-column-lr>
+      <h1 big-heading>Login</h1>
+    </div>
+     
+      <ion-item transparent>
+      <img icon-small src="assets/user.png" />
+        <!--<ion-label postion="floating">Username</ion-label>-->
+        <ion-input type="text" [(ngModel)]="email" placeholder="Username"></ion-input>
+      </ion-item>
+      
+      <ion-item transparent>
+         <img icon-small src="assets/lock.png" />
+        <!--<ion-label postion="floating">Password</ion-label>-->
+        <ion-input type="password" [(ngModel)]="password" placeholder="Password"></ion-input>
+      </ion-item>
+      
+
+    
+  </ion-list>
+  <div linespace></div>
+  <ion-button fill="solid" expand="block" color="warning" class = "ion-button-class" (click)="login()">Login</ion-button>
+  <div linespace></div>
+  <ion-button fill="solid" expand="block" color="warning" class = "ion-button-class" (click)="goToSignup()">Register</ion-button>
+</div>
 </ion-content>

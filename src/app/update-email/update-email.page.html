@@ -1,5 +1,6 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
+    <!--I changed the name from Update Email to settings-->
     <ion-title>Update Email</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -11,10 +12,10 @@
   <form [formGroup]="updateEmail" (submit)="update(updateEmail.value)">
 
     <ion-item>
-        <ion-label color="primary" position="floating">Email</ion-label>
+        <ion-label color="dark" position="floating">Email</ion-label>
         <ion-input type="text" formControlName="email" required value={{email}}></ion-input>
     </ion-item>
 
-    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!updateEmail.valid">Update Email</ion-button>
+    <ion-button color="warning" class="submit-btn" expand="block" type="submit" [disabled]="!updateEmail.valid">Update Email</ion-button>
     </form>
 </ion-content>

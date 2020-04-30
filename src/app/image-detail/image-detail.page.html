@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
     <ion-title>Your Post</ion-title>
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
@@ -13,12 +13,12 @@
     </ion-card>
   <form [formGroup]="edit_item_form" (submit)="updateItem(edit_item_form.value)">
       <ion-item>
-        <ion-label color="primary" position="floating">Title</ion-label>
+        <ion-label color="dark" position="floating">Title</ion-label>
         <ion-input type="text" formControlName="title" required></ion-input>
       </ion-item>
   
-      <ion-button class="submit-btn" expand="block" type="submit" >Update</ion-button>
-      <ion-button expand="block" (click)="deletePost()">Delete Item</ion-button>
+      <ion-button color="warning" class="submit-btn" expand="block" type="submit" >Update</ion-button>
+      <ion-button color="warning" expand="block" (click)="deletePost()">Delete Item</ion-button>
       
     </form>
   </ion-content>

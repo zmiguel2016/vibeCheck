@@ -1,6 +1,10 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
     <ion-title>Your Vibe Check!</ion-title>
+    <ion-back-button>
+    <ion-icon name="arrow-back-outline"> 
+    </ion-icon> 
+  </ion-back-button>
   </ion-toolbar>
 </ion-header>
 
@@ -19,6 +23,6 @@
     </ion-item>
   </ion-card>
 
-<ion-button (click)= "goToFeed()">Such a Vibe!</ion-button>
-<ion-button (click)= "deletePost()">Not Feeling the Vibe :/</ion-button>
+<ion-button color="warning" (click)= "goToFeed()">Such a Vibe!</ion-button>
+<ion-button color="warning" (click)= "deletePost()">Not Feeling the Vibe :/</ion-button>
 </ion-content>

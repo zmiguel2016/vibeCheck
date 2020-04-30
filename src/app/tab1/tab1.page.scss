@@ -1,3 +1,11 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+.login-header{
+  background: var(--theme-color);
+}
+.login-header {
+   position: relative;
+   background: var(--theme-color);
+   border-radius: 0em;
+}
