@@ -1,8 +1,11 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="warning">
     <ion-title>Vibe Checker</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
+      <ion-back-button>  
+        <ion-icon name="arrow-back-outline">
+        </ion-icon> 
+      </ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -10,7 +13,7 @@
 <ion-content padding>
 <form [formGroup]="new_item_form" (submit)="createItem(new_item_form.value)">
     <ion-item>
-      <ion-label color="primary" position="floating">Title</ion-label>
+      <ion-label color="dark" position="floating">Title</ion-label>
       <ion-input type="text" formControlName="title" required></ion-input>
     </ion-item>
     
@@ -21,7 +24,7 @@
   -->  
    
 <!--<img [src]="clickedImage" />-->
-    <ion-button class="submit-btn" expand="block" type="submit" [disabled]="!new_item_form.valid">Create</ion-button>
+    <ion-button color="warning" class="submit-btn" expand="block" type="submit" [disabled]="!new_item_form.valid">Create</ion-button>
   </form>
 
 </ion-content>
